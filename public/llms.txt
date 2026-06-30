@@ -1,0 +1,7 @@
+# TripBuddy AI
+
+> AI-powered outing planner for friends. Generate full itineraries, budget breakdowns, and three alternative plans in seconds.
+
+## Pages
+- [Home](/): Landing page and product overview
+- [Plan a Trip](/plan): Multi-input planner form for budget, vibe, group and transport
