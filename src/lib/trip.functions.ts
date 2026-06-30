@@ -1,5 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
-import { generateText, Output } from "ai";
+import { generateObject } from "ai";
 import { z } from "zod";
 import { createLovableAiGateway } from "./ai-gateway.server";
 import type { TripInput, TripPlan } from "./types";
@@ -84,13 +84,14 @@ export const generateTrip = createServerFn({ method: "POST" })
     if (!key) throw new Error("Missing LOVABLE_API_KEY");
 
     const gateway = createLovableAiGateway(key);
-    const { output } = await generateText({
+    const { object } = await generateObject({
       model: gateway("google/gemini-3-flash-preview"),
-      output: Output.object({ schema: PlanSchema }),
+      schema: PlanSchema,
+      
       prompt: buildPrompt(data),
       system:
-        "You are TripBuddy AI, an expert at planning group outings in India. Output realistic, exciting, budget-aware plans with specific real-world venues.",
+        "You are TripBuddy AI, an expert at planning group outings in India. Output realistic, exciting, budget-aware plans with specific real-world venues. Always return valid JSON matching the requested schema exactly.",
     });
 
-    return output as TripPlan;
+    return object as TripPlan;
   });
