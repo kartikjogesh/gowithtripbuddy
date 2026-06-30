@@ -87,7 +87,7 @@ export const generateTrip = createServerFn({ method: "POST" })
     const { object } = await generateObject({
       model: gateway("google/gemini-3-flash-preview"),
       schema: PlanSchema,
-      mode: "json",
+      
       prompt: buildPrompt(data),
       system:
         "You are TripBuddy AI, an expert at planning group outings in India. Output realistic, exciting, budget-aware plans with specific real-world venues. Always return valid JSON matching the requested schema exactly.",
