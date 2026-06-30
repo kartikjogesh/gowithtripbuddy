@@ -84,13 +84,13 @@ export const generateTrip = createServerFn({ method: "POST" })
     if (!key) throw new Error("Missing LOVABLE_API_KEY");
 
     const gateway = createLovableAiGateway(key);
-    const { experimental_output } = await generateText({
+    const { output } = await generateText({
       model: gateway("google/gemini-3-flash-preview"),
-      experimental_output: Output.object({ schema: PlanSchema }),
+      output: Output.object({ schema: PlanSchema }),
       prompt: buildPrompt(data),
       system:
         "You are TripBuddy AI, an expert at planning group outings in India. Output realistic, exciting, budget-aware plans with specific real-world venues.",
     });
 
-    return experimental_output as TripPlan;
+    return output as TripPlan;
   });
